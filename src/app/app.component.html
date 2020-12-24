@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row bg-primary shadow">
     <div class="col-6 px-0">
-      <div class="h1 py-4 text-right text-white px-0 mx-0 " style="text-shadow: black 1px 1px 70px">JSON Tools </div>
+      <div class="h1 py-4 text-right text-white px-0 mx-0 " style="text-shadow: #000000 1px 1px 70px">JSON Tools </div>
     </div>
     <div class="col-6">
       <div class=" badge badge-secondary text-right my-5 mx-0 px-0" >1.6.1</div>
@@ -15,9 +15,9 @@
         <div class="card-body ">
           <div class="h5 text-center">Minify</div>
           <div class="text-muted">Minify your JSON</div>
-          <form>
+          <form [formGroup]="minifyForm" (ngSubmit)="minify()">
             <label hidden>JSON</label>
-              <textarea class="form-control"></textarea>
+              <textarea class="form-control" formControlName="json"></textarea>
             <button class="btn btn-outline-info mt-3">Submit</button>
           </form>
         </div>
@@ -28,9 +28,9 @@
         <div class="card-body ">
           <div class="h5 text-center">Beautyfy</div>
           <div class="text-muted">Pretty format your JSON</div>
-          <form>
+          <form [formGroup]="beautyfyForm" (ngSubmit)="beautyfy()">
             <label hidden>JSON</label>
-            <textarea class="form-control"></textarea>
+            <textarea class="form-control" formControlName="json"></textarea>
             <button class="btn btn-outline-info mt-3">Submit</button>
           </form>
         </div>
@@ -41,9 +41,10 @@
         <div class="card-body ">
           <div class="h5 text-center">Dropper</div>
           <div class="text-muted">Remove parts of your JSON</div>
-          <form>
+          <form [formGroup]="dropperForm" (ngSubmit)="dropper()">
             <label hidden>JSON</label>
-            <textarea class="form-control"></textarea>
+            <textarea class="form-control" formControlName="json"></textarea>
+            <input type="text" class="form-control mt-2" formControlName="toDrop">
             <button class="btn btn-outline-info mt-3">Submit</button>
           </form>
         </div>
@@ -56,9 +57,10 @@
         <div class="card-body ">
           <div class="h5 text-center">Filter</div>
           <div class="text-muted">Filter keys in your JSON</div>
-          <form>
+          <form [formGroup]="filterForm" (ngSubmit)="filter()">
             <label hidden>JSON</label>
-            <textarea class="form-control"></textarea>
+            <textarea class="form-control" formControlName="json"></textarea>
+            <input type="text" formControlName="toFilter" class="mt-2 form-control">
             <button class="btn btn-outline-info mt-3">Submit</button>
           </form>
         </div>
@@ -69,13 +71,43 @@
         <div class="card-body ">
           <div class="h5 text-center">Compare</div>
           <div class="text-muted">Compare your JSON</div>
-          <form>
-            <label for="compare" hidden>JSON</label>
-            <textarea id="compare" class="form-control"></textarea>
+          <form [formGroup]="compareForm" (ngSubmit)="compare()">
+            <label hidden>JSON</label>
+            <textarea id="compare1" class="form-control" formControlName="json1"></textarea>
+            <textarea id="compare2" class="form-control mt-2" formControlName="json2"></textarea>
             <button class="btn btn-outline-info mt-3">Submit</button>
           </form>
         </div>
       </div>
     </div>
   </div>
+  <div class="row mt-5">
+    <div class="col-12">
+      <div class="card border-danger shadow-sm" [ngClass]="shadow5" (mouseover)="shadow5='shadow'" (mouseout)="shadow5='shadow-sm'">
+        <div class="card-body">
+          <div class="h5 text-left">Response</div>
+          <form [formGroup]="responseForm">
+            <label for="response" hidden>Response</label>
+            <textarea id="response" class="form-control" formControlName="response"></textarea>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>
+    {{ minifyForm.value | json}}
+  </p>
+  <p>
+    {{beautyfyForm.value | json}}
+  </p>
+  <p>
+    {{dropperForm.value | json}}
+  </p>
+  <p>
+    {{filterForm.value | json}}
+  </p>
+  <p>
+    {{compareForm.value | json}}
+  </p>
 </div>
+
